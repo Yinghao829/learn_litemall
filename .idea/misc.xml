@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/litemall_all/pom.xml" />
+        <option value="$PROJECT_DIR$/litemall_admin_api/pom.xml" />
+        <option value="$PROJECT_DIR$/litemall_db/pom.xml" />
       </list>
     </option>
   </component>
