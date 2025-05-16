@@ -7,7 +7,7 @@
         <artifactId>learn_litemall</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>litemall_admin_api</artifactId>
+    <artifactId>litemall-admin-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <url/>
     <licenses>
@@ -26,7 +26,11 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-
+        <dependency>
+            <groupId>org.linlinjava</groupId>
+            <artifactId>litemall-db</artifactId>
+            <version>0.1.0</version>
+        </dependency>
     </dependencies>
 
 

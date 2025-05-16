@@ -17,18 +17,35 @@
   <url>http://maven.apache.org</url>
 
   <modules>
-    <module>litemall_admin_api</module>
-    <module>litemall_all</module>
-    <module>litemall_db</module>
+    <module>litemall-admin-api</module>
+    <module>litemall-all</module>
+    <module>litemall-db</module>
   </modules>
 
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>17</java.version>
+    <maven.test.skip>true</maven.test.skip>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.hao</groupId>
+        <artifactId>litemall-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hao</groupId>
+        <artifactId>litemall-db</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ort.hao</groupId>
+        <artifactId>litemall-admin-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.mybatis.spring.boot</groupId>
         <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -64,7 +81,42 @@
         <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
         <version>3.5.9</version>
       </dependency>
-
+      <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
+      <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>aliyun-java-sdk-core</artifactId>
+        <version>4.6.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.qcloudsms</groupId>
+        <artifactId>qcloudsms</artifactId>
+        <version>1.0.5</version>
+      </dependency>
+      <dependency>
+        <groupId>com.qcloud</groupId>
+        <artifactId>cos_api</artifactId>
+        <version>5.6.24</version>
+      </dependency>
+      <dependency>
+        <groupId>com.aliyun.oss</groupId>
+        <artifactId>aliyun-sdk-oss</artifactId>
+        <version>2.5.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.qiniu</groupId>
+        <artifactId>qiniu-java-sdk</artifactId>
+        <version>7.2.29</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.binarywang</groupId>
+        <artifactId>weixin-java-miniapp</artifactId>
+        <version>4.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.binarywang</groupId>
+        <artifactId>weixin-java-pay</artifactId>
+        <version>4.1.0</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -110,13 +162,6 @@
     </dependency>
 
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
+
 
 </project>

@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.hao</groupId>
-    <artifactId>litemall_db</artifactId>
+    <artifactId>litemall-db</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <parent>
         <groupId>org.hao</groupId>
         <artifactId>learn_litemall</artifactId>
@@ -33,16 +33,16 @@
             <artifactId>spring-boot-starter-json</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
 
     </dependencies>
@@ -72,10 +72,9 @@
                         <artifactId>mybatis-generator-plugin</artifactId>
                         <version>1.3.2</version>
                     </dependency>
+
                 </dependencies>
             </plugin>
         </plugins>
     </build>
-
-
 </project>
