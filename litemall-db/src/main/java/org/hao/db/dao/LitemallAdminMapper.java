@@ -1,10 +1,13 @@
 package org.hao.db.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.hao.db.domain.LitemallAdmin;
 import org.hao.db.domain.LitemallAdminExample;
 
+@Mapper
 public interface LitemallAdminMapper {
     long countByExample(LitemallAdminExample example);
 

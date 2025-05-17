@@ -90,6 +90,10 @@
             <groupId>org.hao</groupId>
             <artifactId>litemall-db</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.collect</groupId>
+            <artifactId>com.springsource.com.google.common.collect</artifactId>
+        </dependency>
 
     </dependencies>
 

@@ -1,4 +1,4 @@
-package org.hao;
+package org.hao.core;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -20,6 +20,7 @@
     <module>litemall-admin-api</module>
     <module>litemall-all</module>
     <module>litemall-db</module>
+    <module>litemall-core</module>
   </modules>
 
 
@@ -117,6 +118,33 @@
         <artifactId>weixin-java-pay</artifactId>
         <version>4.1.0</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.shiro</groupId>
+        <artifactId>shiro-spring-boot-web-starter</artifactId>
+        <version>1.6.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>8.0.2.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.penggle</groupId>
+        <artifactId>kaptcha</artifactId>
+        <version>2.3.2</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.xiaoymin</groupId>
+        <artifactId>swagger-bootstrap-ui</artifactId>
+        <version>1.9.6</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.google.collect/com.springsource.com.google.common.collect -->
+      <dependency>
+        <groupId>com.google.collect</groupId>
+        <artifactId>com.springsource.com.google.common.collect</artifactId>
+        <version>0.8.0.20080820</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 

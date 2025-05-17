@@ -1,0 +1,50 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="isIgnoringEnabled" value="true" />
+      <option name="ignoredModules">
+        <list>
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+          <option value="litemall-core" />
+        </list>
+      </option>
+      <option name="ignoredPackages">
+        <list>
+          <option value="org.json:json:20170516" />
+          <option value="commons-collections:commons-collections:3.2.1" />
+          <option value="org.jdom:jdom:1.1" />
+          <option value="com.squareup.okio:okio:1.17.2" />
+          <option value="com.google.guava:guava:29.0-jre" />
+          <option value="org.jodd:jodd-http:5.2.0" />
+          <option value="com.github.pagehelper:pagehelper:5.1.4" />
+          <option value="com.thoughtworks.xstream:xstream:1.4.17" />
+          <option value="commons-io:commons-io:2.7" />
+          <option value="org.bouncycastle:bcprov-jdk15on:1.70" />
+        </list>
+      </option>
+      <option name="ignoredReasons">
+        <list>
+          <option value="不可利用" />
+          <option value="不可利用" />
+          <option value="不可利用" />
+          <option value="不可利用" />
+          <option value="不可利用" />
+          <option value="不可利用" />
+          <option value="不可利用" />
+          <option value="不可利用" />
+          <option value="不可利用" />
+          <option value="不可利用" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
