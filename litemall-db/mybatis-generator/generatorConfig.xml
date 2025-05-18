@@ -44,16 +44,15 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 <!--      生成数据库表对应的Java实体类。  -->
-        <javaModelGenerator targetPackage="org.hao.db.domain" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="org.hao.litemall.db.domain" targetProject="src/main/java"/>
 <!--    生成Mapper XML文件（SQL语句和映射配置）。    -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <sqlMapGenerator targetPackage="org.hao.litemall.db.dao" targetProject="src/main/resources"/>
 <!-- 生成Mapper接口（操作数据库的抽象方法）。 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="org.hao.db.dao" targetProject="src/main/java"/>
-<!-- 已经生成过了，并且写了部分注释，千万别改了 -->
-<!--        <table tableName="litemall_admin">-->
-<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
-<!--            <columnOverride column="role_ids" javaType="java.lang.Integer[]"-->
-<!--                            typeHandler="org.hao.db.mybatis.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.hao.litemall.db.dao" targetProject="src/main/java"/>
+        <table tableName="litemall_admin">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="role_ids" javaType="java.lang.Integer[]"
+                            typeHandler="org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler"/>
+        </table>
     </context>
 </generatorConfiguration>

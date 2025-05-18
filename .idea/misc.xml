@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/litemall_admin_api/pom.xml" />
         <option value="$PROJECT_DIR$/litemall_db/pom.xml" />
         <option value="$PROJECT_DIR$/litemall-core/pom.xml" />
+        <option value="$PROJECT_DIR$/litemall-all-war/pom.xml" />
       </list>
     </option>
   </component>

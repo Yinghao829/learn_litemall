@@ -5,6 +5,3 @@ spring:
     username: root
     password: hao@0829
     type: com.alibaba.druid.pool.DruidDataSource
-
-
-
