@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.hao.litemall.db.dao.LitemallAdminMapper">
-  <resultMap id="BaseResultMap" type="org.hao.litemall.db.domain.LitemallAdmin">
+<mapper namespace="org.hao.litemall.db.dao.LitemallUserMapper">
+  <resultMap id="BaseResultMap" type="org.hao.litemall.db.domain.LitemallUser">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="user_level" jdbcType="TINYINT" property="userLevel" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="weixin_openid" jdbcType="VARCHAR" property="weixinOpenid" />
+    <result column="session_key" jdbcType="VARCHAR" property="sessionKey" />
+    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
-    <result column="role_ids" jdbcType="VARCHAR" property="roleIds" typeHandler="org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -33,25 +40,6 @@
                   and ${criterion.condition}
                   <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-            <foreach collection="criteria.roleIdsCriteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler} and #{criterion.secondValue,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
                   </foreach>
                 </when>
               </choose>
@@ -85,41 +73,23 @@
                 </when>
               </choose>
             </foreach>
-            <foreach collection="criteria.roleIdsCriteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler} and #{criterion.secondValue,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
           </trim>
         </if>
       </foreach>
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, last_login_ip, last_login_time, avatar, add_time, update_time, 
-    deleted, role_ids
+    id, username, password, gender, birthday, last_login_time, last_login_ip, user_level, 
+    nickname, mobile, avatar, weixin_openid, session_key, status, add_time, update_time, 
+    deleted
   </sql>
-  <select id="selectByExample" parameterType="org.hao.litemall.db.domain.LitemallAdminExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.hao.litemall.db.domain.LitemallUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from litemall_admin
+    from litemall_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -142,7 +112,7 @@
         <include refid="Base_Column_List" />
       </otherwise>
     </choose>
-    from litemall_admin
+    from litemall_user
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -153,13 +123,13 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from litemall_admin
+    from litemall_user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKeyWithLogicalDelete" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from litemall_admin
+    from litemall_user
     where id = #{id,jdbcType=INTEGER}
       and deleted = 
     <choose>
@@ -183,37 +153,41 @@
         <include refid="Base_Column_List" />
       </otherwise>
     </choose>
-    from litemall_admin
+    from litemall_user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from litemall_admin
+    delete from litemall_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="org.hao.litemall.db.domain.LitemallAdminExample">
-    delete from litemall_admin
+  <delete id="deleteByExample" parameterType="org.hao.litemall.db.domain.LitemallUserExample">
+    delete from litemall_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.hao.litemall.db.domain.LitemallAdmin">
+  <insert id="insert" parameterType="org.hao.litemall.db.domain.LitemallUser">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into litemall_admin (username, password, last_login_ip, 
-      last_login_time, avatar, add_time, 
-      update_time, deleted, role_ids
-      )
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR}, 
-      #{lastLoginTime,jdbcType=TIMESTAMP}, #{avatar,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}, #{roleIds,jdbcType=VARCHAR,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
-      )
+    insert into litemall_user (username, password, gender, 
+      birthday, last_login_time, last_login_ip, 
+      user_level, nickname, mobile, 
+      avatar, weixin_openid, session_key, 
+      status, add_time, update_time, 
+      deleted)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, 
+      #{birthday,jdbcType=DATE}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, 
+      #{userLevel,jdbcType=TINYINT}, #{nickname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{weixinOpenid,jdbcType=VARCHAR}, #{sessionKey,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="org.hao.litemall.db.domain.LitemallAdmin">
+  <insert id="insertSelective" parameterType="org.hao.litemall.db.domain.LitemallUser">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into litemall_admin
+    insert into litemall_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="username != null">
         username,
@@ -221,14 +195,38 @@
       <if test="password != null">
         password,
       </if>
-      <if test="lastLoginIp != null">
-        last_login_ip,
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="birthday != null">
+        birthday,
       </if>
       <if test="lastLoginTime != null">
         last_login_time,
       </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="userLevel != null">
+        user_level,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
       <if test="avatar != null">
         avatar,
+      </if>
+      <if test="weixinOpenid != null">
+        weixin_openid,
+      </if>
+      <if test="sessionKey != null">
+        session_key,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="addTime != null">
         add_time,
@@ -239,9 +237,6 @@
       <if test="deleted != null">
         deleted,
       </if>
-      <if test="roleIds != null">
-        role_ids,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="username != null">
@@ -250,14 +245,38 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="lastLoginIp != null">
-        #{lastLoginIp,jdbcType=VARCHAR},
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
       </if>
       <if test="lastLoginTime != null">
         #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=TINYINT},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
       <if test="avatar != null">
         #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinOpenid != null">
+        #{weixinOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionKey != null">
+        #{sessionKey,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
       </if>
       <if test="addTime != null">
         #{addTime,jdbcType=TIMESTAMP},
@@ -268,19 +287,16 @@
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
       </if>
-      <if test="roleIds != null">
-        #{roleIds,jdbcType=VARCHAR,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.hao.litemall.db.domain.LitemallAdminExample" resultType="java.lang.Long">
-    select count(*) from litemall_admin
+  <select id="countByExample" parameterType="org.hao.litemall.db.domain.LitemallUserExample" resultType="java.lang.Long">
+    select count(*) from litemall_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update litemall_admin
+    update litemall_user
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -291,14 +307,38 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.lastLoginIp != null">
-        last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=TINYINT},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=DATE},
       </if>
       <if test="record.lastLoginTime != null">
         last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.lastLoginIp != null">
+        last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLevel != null">
+        user_level = #{record.userLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
       <if test="record.avatar != null">
         avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixinOpenid != null">
+        weixin_openid = #{record.weixinOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sessionKey != null">
+        session_key = #{record.sessionKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
       </if>
       <if test="record.addTime != null">
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
@@ -309,32 +349,36 @@
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
-      <if test="record.roleIds != null">
-        role_ids = #{record.roleIds,jdbcType=VARCHAR,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update litemall_admin
+    update litemall_user
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=TINYINT},
+      birthday = #{record.birthday,jdbcType=DATE},
       last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      user_level = #{record.userLevel,jdbcType=TINYINT},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
       avatar = #{record.avatar,jdbcType=VARCHAR},
+      weixin_openid = #{record.weixinOpenid,jdbcType=VARCHAR},
+      session_key = #{record.sessionKey,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
       add_time = #{record.addTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      deleted = #{record.deleted,jdbcType=BIT},
-      role_ids = #{record.roleIds,jdbcType=VARCHAR,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
+      deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.hao.litemall.db.domain.LitemallAdmin">
-    update litemall_admin
+  <update id="updateByPrimaryKeySelective" parameterType="org.hao.litemall.db.domain.LitemallUser">
+    update litemall_user
     <set>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
@@ -342,14 +386,38 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="lastLoginIp != null">
-        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
       </if>
       <if test="lastLoginTime != null">
         last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        user_level = #{userLevel,jdbcType=TINYINT},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
       <if test="avatar != null">
         avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinOpenid != null">
+        weixin_openid = #{weixinOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionKey != null">
+        session_key = #{sessionKey,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
       </if>
       <if test="addTime != null">
         add_time = #{addTime,jdbcType=TIMESTAMP},
@@ -360,29 +428,33 @@
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
-      <if test="roleIds != null">
-        role_ids = #{roleIds,jdbcType=VARCHAR,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.hao.litemall.db.domain.LitemallAdmin">
-    update litemall_admin
+  <update id="updateByPrimaryKey" parameterType="org.hao.litemall.db.domain.LitemallUser">
+    update litemall_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      birthday = #{birthday,jdbcType=DATE},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      user_level = #{userLevel,jdbcType=TINYINT},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
+      weixin_openid = #{weixinOpenid,jdbcType=VARCHAR},
+      session_key = #{sessionKey,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
       add_time = #{addTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=BIT},
-      role_ids = #{roleIds,jdbcType=VARCHAR,typeHandler=org.hao.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
+      deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectOneByExample" parameterType="org.hao.litemall.db.domain.LitemallAdminExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="org.hao.litemall.db.domain.LitemallUserExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from litemall_admin
+    from litemall_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -403,7 +475,7 @@
         <include refid="Base_Column_List" />
       </otherwise>
     </choose>
-    from litemall_admin
+    from litemall_user
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -413,13 +485,13 @@
     limit 1
   </select>
   <update id="logicalDeleteByExample" parameterType="map">
-    update litemall_admin set deleted = 1
+    update litemall_user set deleted = 1
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="logicalDeleteByPrimaryKey" parameterType="java.lang.Integer">
-    update litemall_admin set deleted = 1
+    update litemall_user set deleted = 1
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
