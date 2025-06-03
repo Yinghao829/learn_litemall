@@ -16,7 +16,7 @@ import org.hao.litemall.core.validator.Order;
 import org.hao.litemall.core.validator.Sort;
 import org.hao.litemall.core.util.ResponseUtil;
 import org.hao.litemall.db.domain.LitemallAdmin;
-import org.hao.litemall.db.service.LitemallAdminService;
+import org.hao.litemall.db.service.impl.LitemallAdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public class AdminController {
     private final Log logger = LogFactory.getLog(AdminController.class);
 
     @Autowired
-    private LitemallAdminService adminService;
+    private LitemallAdminServiceImpl adminService;
     @Autowired
     private LogHelper logHelper;
 

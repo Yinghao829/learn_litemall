@@ -6,7 +6,7 @@ import org.hao.litemall.core.util.ResponseUtil;
 import org.hao.litemall.core.validator.Order;
 import org.hao.litemall.core.validator.Sort;
 import org.hao.litemall.db.domain.LitemallUser;
-import org.hao.litemall.db.service.LitemallUserService;
+import org.hao.litemall.db.service.impl.LitemallUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private LitemallUserService userService;
+    private LitemallUserServiceImpl userService;
 
     @RequiresPermissions("admin:user:list")
     @RequiresPermissionsDesc(menu = {"用户管理", "会员管理"}, button = "查询")

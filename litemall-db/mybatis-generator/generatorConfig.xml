@@ -59,5 +59,21 @@
         <table schema="litemall_db" tableName="litemall_user">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
+        <table schema="litemall_db" tableName="litemall_goods">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="gallery" javaType="java.lang.String[]"
+                            typeHandler="org.hao.litemall.db.mybatis.JsonStringArrayTypeHandler"/>
+        </table>
+        <table schema="litemall_db" tableName="litemall_goods_attribute">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table schema="litemall_db" tableName="litemall_goods_product">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table schema="litemall_db" tableName="litemall_goods_specification">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="specification" javaType="java.lang.String[]"
+                            typeHandler="org.hao.litemall.db.mybatis.JsonStringArrayTypeHandler"/>
+        </table>
     </context>
 </generatorConfiguration>
