@@ -13,7 +13,7 @@ public class LitemallGoodsSpecification {
 
     private Integer goodsId;
 
-    private String[] specification;
+    private String specification;
 
     private String value;
 
@@ -41,11 +41,11 @@ public class LitemallGoodsSpecification {
         this.goodsId = goodsId;
     }
 
-    public String[] getSpecification() {
+    public String getSpecification() {
         return specification;
     }
 
-    public void setSpecification(String[] specification) {
+    public void setSpecification(String specification) {
         this.specification = specification;
     }
 
@@ -127,7 +127,7 @@ public class LitemallGoodsSpecification {
         LitemallGoodsSpecification other = (LitemallGoodsSpecification) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (Arrays.equals(this.getSpecification(), other.getSpecification()))
+            && (this.getSpecification() == null ? other.getSpecification() == null : this.getSpecification().equals(other.getSpecification()))
             && (this.getValue() == null ? other.getValue() == null : this.getValue().equals(other.getValue()))
             && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()))
             && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
@@ -141,7 +141,7 @@ public class LitemallGoodsSpecification {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
-        result = prime * result + (Arrays.hashCode(getSpecification()));
+        result = prime * result + ((getSpecification() == null) ? 0 : getSpecification().hashCode());
         result = prime * result + ((getValue() == null) ? 0 : getValue().hashCode());
         result = prime * result + ((getPicUrl() == null) ? 0 : getPicUrl().hashCode());
         result = prime * result + ((getAddTime() == null) ? 0 : getAddTime().hashCode());

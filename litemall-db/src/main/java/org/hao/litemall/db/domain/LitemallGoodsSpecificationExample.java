@@ -103,50 +103,19 @@ public class LitemallGoodsSpecificationExample {
     }
 
     protected abstract static class GeneratedCriteria {
-        protected List<Criterion> specificationCriteria;
-
-        protected List<Criterion> allCriteria;
-
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
             super();
             criteria = new ArrayList<Criterion>();
-            specificationCriteria = new ArrayList<Criterion>();
-        }
-
-        public List<Criterion> getSpecificationCriteria() {
-            return specificationCriteria;
-        }
-
-        protected void addSpecificationCriterion(String condition, Object value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            specificationCriteria.add(new Criterion(condition, value, "org.hao.litemall.db.mybatis.JsonStringArrayTypeHandler"));
-            allCriteria = null;
-        }
-
-        protected void addSpecificationCriterion(String condition, String[] value1, String[] value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            specificationCriteria.add(new Criterion(condition, value1, value2, "org.hao.litemall.db.mybatis.JsonStringArrayTypeHandler"));
-            allCriteria = null;
         }
 
         public boolean isValid() {
-            return criteria.size() > 0
-                || specificationCriteria.size() > 0;
+            return criteria.size() > 0;
         }
 
         public List<Criterion> getAllCriteria() {
-            if (allCriteria == null) {
-                allCriteria = new ArrayList<Criterion>();
-                allCriteria.addAll(criteria);
-                allCriteria.addAll(specificationCriteria);
-            }
-            return allCriteria;
+            return criteria;
         }
 
         public List<Criterion> getCriteria() {
@@ -158,7 +127,6 @@ public class LitemallGoodsSpecificationExample {
                 throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
-            allCriteria = null;
         }
 
         protected void addCriterion(String condition, Object value, String property) {
@@ -166,7 +134,6 @@ public class LitemallGoodsSpecificationExample {
                 throw new RuntimeException("Value for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value));
-            allCriteria = null;
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
@@ -174,7 +141,6 @@ public class LitemallGoodsSpecificationExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-            allCriteria = null;
         }
 
         public Criteria andIdIsNull() {
@@ -367,8 +333,8 @@ public class LitemallGoodsSpecificationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationEqualTo(String[] value) {
-            addSpecificationCriterion("specification =", value, "specification");
+        public Criteria andSpecificationEqualTo(String value) {
+            addCriterion("specification =", value, "specification");
             return (Criteria) this;
         }
 
@@ -377,8 +343,8 @@ public class LitemallGoodsSpecificationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationNotEqualTo(String[] value) {
-            addSpecificationCriterion("specification <>", value, "specification");
+        public Criteria andSpecificationNotEqualTo(String value) {
+            addCriterion("specification <>", value, "specification");
             return (Criteria) this;
         }
 
@@ -387,8 +353,8 @@ public class LitemallGoodsSpecificationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationGreaterThan(String[] value) {
-            addSpecificationCriterion("specification >", value, "specification");
+        public Criteria andSpecificationGreaterThan(String value) {
+            addCriterion("specification >", value, "specification");
             return (Criteria) this;
         }
 
@@ -397,8 +363,8 @@ public class LitemallGoodsSpecificationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationGreaterThanOrEqualTo(String[] value) {
-            addSpecificationCriterion("specification >=", value, "specification");
+        public Criteria andSpecificationGreaterThanOrEqualTo(String value) {
+            addCriterion("specification >=", value, "specification");
             return (Criteria) this;
         }
 
@@ -407,8 +373,8 @@ public class LitemallGoodsSpecificationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationLessThan(String[] value) {
-            addSpecificationCriterion("specification <", value, "specification");
+        public Criteria andSpecificationLessThan(String value) {
+            addCriterion("specification <", value, "specification");
             return (Criteria) this;
         }
 
@@ -417,8 +383,8 @@ public class LitemallGoodsSpecificationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationLessThanOrEqualTo(String[] value) {
-            addSpecificationCriterion("specification <=", value, "specification");
+        public Criteria andSpecificationLessThanOrEqualTo(String value) {
+            addCriterion("specification <=", value, "specification");
             return (Criteria) this;
         }
 
@@ -427,33 +393,33 @@ public class LitemallGoodsSpecificationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationLike(String[] value) {
-            addSpecificationCriterion("specification like", value, "specification");
+        public Criteria andSpecificationLike(String value) {
+            addCriterion("specification like", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationNotLike(String[] value) {
-            addSpecificationCriterion("specification not like", value, "specification");
+        public Criteria andSpecificationNotLike(String value) {
+            addCriterion("specification not like", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationIn(List<String[]> values) {
-            addSpecificationCriterion("specification in", values, "specification");
+        public Criteria andSpecificationIn(List<String> values) {
+            addCriterion("specification in", values, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationNotIn(List<String[]> values) {
-            addSpecificationCriterion("specification not in", values, "specification");
+        public Criteria andSpecificationNotIn(List<String> values) {
+            addCriterion("specification not in", values, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationBetween(String[] value1, String[] value2) {
-            addSpecificationCriterion("specification between", value1, value2, "specification");
+        public Criteria andSpecificationBetween(String value1, String value2) {
+            addCriterion("specification between", value1, value2, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationNotBetween(String[] value1, String[] value2) {
-            addSpecificationCriterion("specification not between", value1, value2, "specification");
+        public Criteria andSpecificationNotBetween(String value1, String value2) {
+            addCriterion("specification not between", value1, value2, "specification");
             return (Criteria) this;
         }
 

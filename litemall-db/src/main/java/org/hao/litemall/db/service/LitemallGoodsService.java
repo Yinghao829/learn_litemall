@@ -7,17 +7,17 @@ import java.util.List;
 public interface LitemallGoodsService {
     /**
      * 获取热卖商品
-     * @param offset
-     * @param limit
-     * @return
+     * @param offset 页面数量
+     * @param limit 页面大小
+     * @return List
      */
     public List<LitemallGoods> queryByHot(int offset, int limit);
 
     /**
      * 获取新品上市
-     * @param offset
-     * @param limit
-     * @return
+     * @param offset 页面数量
+     * @param limit 页面大小
+     * @return List
      */
     public List<LitemallGoods> queryByNew(int offset, int limit);
 

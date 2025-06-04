@@ -11,6 +11,9 @@ import org.hao.litemall.db.service.LitemallGoodsService;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LitemallGoodsServiceImpl implements LitemallGoodsService {
@@ -91,56 +94,119 @@ public class LitemallGoodsServiceImpl implements LitemallGoodsService {
 
     @Override
     public List<LitemallGoods> querySelective(Integer goodsId, String goodsSn, String name, Integer page, Integer size, String sort, String order) {
-        return List.of();
+        LitemallGoodsExample example = new LitemallGoodsExample();
+        LitemallGoodsExample.Criteria criteria = example.createCriteria();
+        if (goodsId != null) {
+            criteria.andIdEqualTo(goodsId);
+        }
+        if (goodsSn != null) {
+            criteria.andGoodsSnEqualTo(goodsSn);
+        }
+        if (name != null) {
+            criteria.andNameLike("%" + name + "%");
+        }
+        if (sort != null && order != null) {
+            example.setOrderByClause(sort + " " + order);
+        }
+
+        PageHelper.startPage(page, size);
+        return goodsMapper.selectByExampleSelective(example, columns);
     }
 
     @Override
     public LitemallGoods findById(Integer id) {
-        return null;
+        LitemallGoodsExample example = new LitemallGoodsExample();
+        example.or().andIdEqualTo(id).andDeletedEqualTo(false);
+        return goodsMapper.selectOneByExampleWithBLOBs(example);
     }
 
     @Override
     public Integer queryOnSale() {
-        return 0;
+        LitemallGoodsExample example = new LitemallGoodsExample();
+        example.or().andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
+        return (int) goodsMapper.countByExample(example);
     }
 
     @Override
     public LitemallGoods findByIdVO(Integer id) {
-        return null;
+        LitemallGoodsExample example = new LitemallGoodsExample();
+        example.or().andIdEqualTo(id).andDeletedEqualTo(false);
+        return goodsMapper.selectOneByExampleSelective(example, columns);
     }
 
     @Override
     public int updateById(LitemallGoods goods) {
-        return 0;
+        goods.setUpdateTime(LocalDateTime.now());
+        return goodsMapper.updateByPrimaryKeySelective(goods);
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        goodsMapper.logicalDeleteByPrimaryKey(id);
     }
 
     @Override
     public void add(LitemallGoods goods) {
-
+        goods.setAddTime(LocalDateTime.now());
+        goods.setUpdateTime(LocalDateTime.now());
+        goodsMapper.insertSelective(goods);
     }
 
     @Override
     public int count() {
-        return 0;
+        LitemallGoodsExample example = new LitemallGoodsExample();
+        example.or().andDeletedEqualTo(false);
+        return (int) goodsMapper.countByExample(example);
     }
 
     @Override
     public List<Integer> getCatIds(Integer brandId, String keywords, Boolean isHot, Boolean isNew) {
-        return List.of();
+        LitemallGoodsExample example = new LitemallGoodsExample();
+        LitemallGoodsExample.Criteria criteria1 = example.or();
+        LitemallGoodsExample.Criteria criteria2 = example.or();
+        if (brandId != null && brandId != 0) {
+            criteria1.andBrandIdEqualTo(brandId);
+            criteria2.andBrandIdEqualTo(brandId);
+        }
+        if (isNew != null) {
+            criteria1.andIsNewEqualTo(isNew);
+            criteria2.andIsNewEqualTo(isNew);
+        }
+        if (isHot != null) {
+            criteria1.andIsHotEqualTo(isHot);
+            criteria2.andIsHotEqualTo(isHot);
+        }
+        if (keywords != null && !keywords.isEmpty()) {
+            criteria1.andKeywordsLike("%" + keywords + "%");
+            criteria2.andNameLike("%" + keywords + "%");
+        }
+        criteria1.andIsOnSaleEqualTo(true);
+        criteria2.andIsOnSaleEqualTo(true);
+        criteria1.andDeletedEqualTo(false);
+        criteria2.andDeletedEqualTo(false);
+
+        List<LitemallGoods> goodsList = goodsMapper.selectByExampleSelective(example, Column.categoryId);
+        List<Integer> catIds = new ArrayList<>();
+
+        for (LitemallGoods goods : goodsList) {
+            catIds.add(goods.getCategoryId());
+        }
+
+        return catIds;
     }
 
     @Override
     public boolean checkExistByName(String name) {
-        return false;
+        LitemallGoodsExample example = new LitemallGoodsExample();
+        example.or().andNameEqualTo(name).andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
+
+        return goodsMapper.countByExample(example) > 0;
     }
 
     @Override
     public List<LitemallGoods> queryByIds(Integer[] ids) {
-        return List.of();
+        LitemallGoodsExample example = new LitemallGoodsExample();
+        example.or().andIdIn(Arrays.asList(ids)).andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
+        return goodsMapper.selectByExampleSelective(example, columns);
     }
 }
