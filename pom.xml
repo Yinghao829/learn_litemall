@@ -21,6 +21,7 @@
     <module>litemall-all</module>
     <module>litemall-db</module>
     <module>litemall-core</module>
+      <module>litemall-wx-api</module>
   </modules>
 
 
@@ -143,6 +144,30 @@
         <groupId>com.google.collect</groupId>
         <artifactId>com.springsource.com.google.common.collect</artifactId>
         <version>0.8.0.20080820</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>32.0.0-jre</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.auth0</groupId>
+        <artifactId>java-jwt</artifactId>
+        <version>3.4.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>aliyun-java-sdk-core</artifactId>
+        <version>4.6.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger2</artifactId>
+        <version>2.9.2</version>
       </dependency>
 
     </dependencies>

@@ -8,7 +8,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>litemall-admin-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <url/>
     <licenses>
         <license/>

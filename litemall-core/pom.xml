@@ -9,9 +9,7 @@
     </parent>
 
     <artifactId>litemall-core</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>litemall-core</name>
-    <description>litemall-core</description>
+
     <url/>
     <licenses>
         <license/>
